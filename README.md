@@ -31,6 +31,10 @@ The scipt produces the json output that can be used as an input for the [terrafo
     ]
   },
 ```
+The output should be saved into the file. Next the contenxts can be read with terrafrom/terragrunt and specified as inputs to the [terraform-aws-route53/records terrafrom module](https://github.com/terraform-aws-modules/terraform-aws-route53/tree/master/modules/records)
+```terraform
+    records_jsonencoded = jsondecode(file("dns_records.json"))
+```
 
 The following is the analogue with `curl`
 ```bash
