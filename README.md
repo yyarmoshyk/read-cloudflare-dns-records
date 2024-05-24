@@ -2,6 +2,7 @@
 This repository contains the script to read and print all the DNS records in the CloudFlare DNS zone.
 Pre-requisistes:
 1. Python3
+1. python json lib (`pip3 install json`)
 1. python requests lib (`pip3 install requests`)
 
 You need to have the following:
