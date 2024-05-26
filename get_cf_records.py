@@ -25,8 +25,21 @@ if response.status_code == 200:
             "name": record['name'],
             "type": record['type'],
             "ttl": record['ttl'],
-            "records": [record['content']]
         }
+        
+        # Remove \" from the record values
+        if isinstance(record['content'], str) and record['content'].startswith("\"") and record['content'].endswith("\""):
+            content = json.loads(record['content'])
+        else:
+            content = record['content']
+
+
+        # Include priority for SRV and MX records into the result
+        if record['type'] in ['SRV', 'MX']:
+            filtered_record["records"] = [record['priority'], content]
+        else:
+            filtered_record["records"] = [content]
+
         filtered_dns_records.append(filtered_record)
     
     # Convert the list to JSON and print it
